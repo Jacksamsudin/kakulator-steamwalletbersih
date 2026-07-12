@@ -8,143 +8,178 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0a0f14;
-    --bg2: #0d141b;
-    --surface: #121a22;
-    --surface2: #182229;
-    --border: #23303a;
-    --border-soft: #1b2530;
-    --text: #e9eff4;
-    --muted: #7c8b9b;
-    --muted2: #56636e;
-    --accent: #3fc7c9;
-    --gold: #f4b83e;
-    --danger: #e0645a;
+    --bg: #f6f4ef;
+    --card: #ffffff;
+    --panel: #fbf9f4;
+    --border: #e6e1d6;
+    --text: #33312c;
+    --muted: #857f72;
+    --muted-soft: #a49e90;
+    --sage: #6f9c85;
+    --sage-soft: #e4efe8;
+    --clay: #d98b5f;
+    --clay-soft: #f7e6da;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
     min-height:100vh;
-    background:
-      radial-gradient(1200px 600px at 15% -10%, #10222199 0%, transparent 60%),
-      radial-gradient(900px 500px at 100% 0%, #14212c99 0%, transparent 55%),
-      var(--bg);
+    background:var(--bg);
     font-family:'Plus Jakarta Sans', sans-serif;
     color:var(--text);
     display:flex;
     align-items:flex-start;
     justify-content:center;
-    padding:48px 16px 80px;
+    padding:48px 16px 90px;
   }
-  .app{
-    width:100%;
-    max-width:440px;
-  }
-  .brand{
-    display:flex;
+
+  .app{ width:100%; max-width:440px; }
+
+  .header{ text-align:center; margin-bottom:22px; }
+  .header .badge{
+    display:inline-flex;
     align-items:center;
-    gap:10px;
-    margin-bottom:6px;
+    gap:6px;
+    background:var(--sage-soft);
+    color:var(--sage);
+    font-size:12px;
+    font-weight:700;
+    padding:6px 12px;
+    border-radius:20px;
+    letter-spacing:0.3px;
+    margin-bottom:14px;
   }
-  .brand-mark{
-    width:34px; height:34px;
-    border-radius:9px;
-    background:linear-gradient(145deg, var(--accent), #1f7a7c);
-    display:flex; align-items:center; justify-content:center;
+  .header h1{
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:-0.3px;
+  }
+  .header p{
+    font-size:14px;
+    color:var(--muted);
+    margin-top:6px;
+    line-height:1.5;
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow: 0 20px 45px -30px rgba(90,80,60,0.35);
+  }
+
+  /* Panel hasil di atas */
+  .result-panel{
+    background:var(--panel);
+    padding:26px 24px 22px;
+    border-bottom:1px solid var(--border);
+    text-align:center;
+  }
+  .result-panel .rlabel{
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--muted);
+    letter-spacing:0.3px;
+    margin-bottom:10px;
+  }
+  .result-panel .rvalue{
     font-family:'IBM Plex Mono', monospace;
     font-weight:700;
-    font-size:15px;
-    color:#03191a;
-    flex-shrink:0;
+    font-size:38px;
+    color:var(--clay);
+    letter-spacing:-0.5px;
+    line-height:1.1;
   }
-  .brand h1{
-    font-size:16px;
-    font-weight:700;
+  .result-sub{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+  .result-sub .formula{
+    font-size:11px;
+    color:var(--muted-soft);
     letter-spacing:0.2px;
   }
-  .brand p{
-    font-size:12px;
+  .result-sub .chip{
+    font-size:12.5px;
     color:var(--muted);
-    margin-top:1px;
-  }
-
-  .ticket{
-    margin-top:22px;
-    background:var(--surface);
+    background:#fff;
     border:1px solid var(--border);
     border-radius:20px;
-    overflow:hidden;
-    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+    padding:5px 12px;
   }
+  .result-sub .chip b{ color:var(--sage); font-weight:700; }
 
-  /* Mode toggle */
-  .toggle{
+  .modes{
     display:flex;
-    gap:6px;
-    padding:14px;
-    border-bottom:1px dashed var(--border-soft);
+    gap:8px;
+    padding:16px;
   }
-  .toggle button{
+  .mode-btn{
     flex:1;
     padding:11px 0;
     border-radius:12px;
-    border:1px solid transparent;
-    background:transparent;
+    border:1px solid var(--border);
+    background:var(--panel);
     color:var(--muted);
     font-family:inherit;
     font-weight:700;
     font-size:13.5px;
-    letter-spacing:0.2px;
     cursor:pointer;
-    transition:all .18s ease;
+    transition:all .15s ease;
   }
-  .toggle button.active.sell{
-    background:linear-gradient(145deg, var(--accent), #2a9fa1);
-    color:#04191a;
-    box-shadow:0 8px 18px -6px rgba(63,199,201,0.45);
+  .mode-btn.active.sell{
+    background:var(--sage);
+    border-color:var(--sage);
+    color:#fff;
   }
-  .toggle button.active.buy{
-    background:linear-gradient(145deg, var(--gold), #c98f22);
-    color:#241300;
-    box-shadow:0 8px 18px -6px rgba(244,184,62,0.4);
+  .mode-btn.active.buy{
+    background:var(--clay);
+    border-color:var(--clay);
+    color:#fff;
   }
-  .toggle button:not(.active):hover{
-    color:var(--text);
-    background:var(--surface2);
-  }
+  .mode-btn:not(.active):hover{ background:#f0ede4; }
 
-  .fields{
-    padding:20px 20px 8px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
+  .body-pad{ padding:4px 20px 20px; }
+
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:6px;
   }
+  @media (max-width:380px){ .grid2{ grid-template-columns:1fr; } }
+
+  .field{ margin-bottom:16px; }
   .field label{
     display:block;
-    font-size:10.5px;
+    font-size:12px;
     font-weight:700;
-    letter-spacing:1.1px;
     color:var(--muted);
-    text-transform:uppercase;
     margin-bottom:8px;
   }
   .field-box{
     display:flex;
     align-items:center;
-    background:var(--bg2);
+    background:var(--panel);
     border:1px solid var(--border);
     border-radius:12px;
     padding:0 14px;
-    transition:border-color .15s ease;
+    transition:border-color .15s ease, box-shadow .15s ease;
   }
   .field-box:focus-within{
-    border-color:var(--accent);
+    border-color:var(--sage);
+    box-shadow:0 0 0 3px var(--sage-soft);
   }
   .field-box .prefix{
+    color:var(--muted-soft);
     font-family:'IBM Plex Mono', monospace;
-    color:var(--muted2);
     font-size:15px;
     padding-right:8px;
-    border-right:1px solid var(--border-soft);
+    border-right:1px solid var(--border);
     margin-right:10px;
     flex-shrink:0;
   }
@@ -156,175 +191,104 @@
     color:var(--text);
     font-family:'IBM Plex Mono', monospace;
     font-weight:600;
-    font-size:18px;
-    padding:13px 0;
+    font-size:17px;
+    padding:12px 0;
     width:100%;
     min-width:0;
   }
-  .field-box input::placeholder{ color:var(--muted2); }
-  .field-hint{
-    font-size:11.5px;
-    color:var(--muted2);
-    margin-top:6px;
-  }
+  .field-box input::placeholder{ color:var(--muted-soft); }
+  .hint{ font-size:11.5px; color:var(--muted-soft); margin-top:6px; }
 
   .adv-toggle{
-    margin:2px 20px 0;
     display:flex;
     align-items:center;
     gap:6px;
-    font-size:11.5px;
+    font-size:12px;
+    font-weight:600;
     color:var(--muted);
     cursor:pointer;
     user-select:none;
-    padding:6px 0;
+    padding:6px 2px;
   }
-  .adv-toggle svg{ transition:transform .15s ease; width:12px; height:12px; }
+  .adv-toggle svg{ width:11px; height:11px; transition:transform .15s ease; color:var(--muted-soft); }
   .adv-toggle.open svg{ transform:rotate(90deg); }
   .adv-panel{
     max-height:0;
     overflow:hidden;
     transition:max-height .2s ease;
-    padding:0 20px;
   }
-  .adv-panel.open{ max-height:120px; padding-top:4px; padding-bottom:12px;}
+  .adv-panel.open{ max-height:100px; padding-top:10px; }
 
-  /* Divider like torn receipt */
-  .tear{
-    position:relative;
-    height:18px;
-    background:
-      radial-gradient(circle at 10px 0, transparent 9px, var(--surface) 9.5px) top/20px 18px repeat-x;
-    margin-top:6px;
-  }
-
-  .result{
-    background:var(--surface2);
-    padding:22px 22px 20px;
-  }
-  .row{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    padding:9px 0;
-  }
-  .row .rlabel{
-    font-size:13px;
-    color:var(--muted);
-  }
-  .row .rvalue{
-    font-family:'IBM Plex Mono', monospace;
-    font-weight:600;
-    font-size:16px;
-    color:var(--text);
-  }
-  .divider{
-    height:1px;
-    background:var(--border-soft);
-    margin:6px 0;
-  }
-  .hero-row{
-    padding-top:14px;
-  }
-  .hero-row .rlabel{
-    font-size:12.5px;
-    color:var(--muted);
-    display:block;
-    margin-bottom:6px;
-  }
-  .hero-value{
-    font-family:'IBM Plex Mono', monospace;
-    font-weight:700;
-    font-size:32px;
-    line-height:1.1;
-    background:linear-gradient(180deg, #ffe7ae, var(--gold));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    letter-spacing:-0.3px;
-  }
-  .hero-formula{
-    font-size:10.5px;
-    color:var(--muted2);
-    margin-top:6px;
-    letter-spacing:0.3px;
-  }
-
-  .footnote{
+  .footer-note{
     text-align:center;
-    font-size:11px;
-    color:var(--muted2);
-    margin-top:16px;
-    line-height:1.5;
-    padding:0 12px;
+    font-size:12px;
+    color:var(--muted-soft);
+    margin-top:18px;
+    line-height:1.6;
+    padding:0 14px;
   }
+  .footer-note b{ color:var(--muted); }
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="brand">
-    <div class="brand-mark">Rp</div>
-    <div>
-      <h1>Kalkulator Wallet</h1>
-      <p>Konversi saldo Steam Wallet ke Rupiah, cepat dan pasti</p>
-    </div>
+  <div class="header">
+    <div class="badge">💳 Steam Wallet</div>
+    <h1>Kalkulator Wallet</h1>
+    <p>Hitung konversi saldo ke Rupiah, cepat dan pasti.</p>
   </div>
 
-  <div class="ticket">
-    <div class="toggle">
-      <button class="sell active" id="btnSell" type="button">Jual Wallet</button>
-      <button class="buy" id="btnBuy" type="button">Beli Wallet</button>
+  <div class="card">
+    <div class="result-panel">
+      <div class="rlabel" id="rowHeroLabel">Harga Jual (kamu terima)</div>
+      <div class="rvalue" id="rowHeroValue">Rp 0</div>
+      <div class="result-sub">
+        <span class="formula" id="rowHeroFormula">SALDO BERSIH × RATE</span>
+        <span class="chip"><span id="rowNetLabel">Saldo Bersih</span>: <b id="rowNetValue">Rp 0</b></span>
+      </div>
     </div>
 
-    <div class="fields">
-      <div class="field" id="fieldMain">
-        <label id="labelMain">Saldo Wallet Penjual</label>
-        <div class="field-box">
-          <span class="prefix">Rp</span>
-          <input type="text" inputmode="numeric" id="inputMain" placeholder="0">
+    <div class="modes">
+      <button class="mode-btn sell active" id="btnSell" type="button">Jual Wallet</button>
+      <button class="mode-btn buy" id="btnBuy" type="button">Beli Wallet</button>
+    </div>
+
+    <div class="body-pad">
+      <div class="grid2">
+        <div class="field">
+          <label id="labelMain">Saldo Wallet</label>
+          <div class="field-box">
+            <span class="prefix">Rp</span>
+            <input type="text" inputmode="numeric" id="inputMain" placeholder="0">
+          </div>
+          <div class="hint" id="hintMain">Sebelum potongan fee.</div>
         </div>
-        <div class="field-hint" id="hintMain">Nominal saldo Steam Wallet sebelum potongan fee.</div>
-      </div>
 
-      <div class="field">
-        <label id="labelRate">Rate Konversi</label>
-        <div class="field-box">
-          <span class="prefix">×</span>
-          <input type="text" inputmode="decimal" id="inputRate" placeholder="0.85">
+        <div class="field">
+          <label>Rate Konversi</label>
+          <div class="field-box">
+            <span class="prefix">×</span>
+            <input type="text" inputmode="decimal" id="inputRate" placeholder="0.85">
+          </div>
+          <div class="hint">Mis. 0.85 = 85%.</div>
         </div>
-        <div class="field-hint">Contoh: 0.85 artinya dihargai 85% dari nilai bersih.</div>
       </div>
-    </div>
 
-    <div class="adv-toggle" id="advToggle">
-      <svg viewBox="0 0 8 12" fill="none"><path d="M1 1L6.5 6L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Atur fee Steam (default 15%)
-    </div>
-    <div class="adv-panel" id="advPanel">
-      <div class="field-box">
-        <span class="prefix">%</span>
-        <input type="text" inputmode="decimal" id="inputFee" placeholder="15">
+      <div class="adv-toggle" id="advToggle">
+        <svg viewBox="0 0 8 12" fill="none"><path d="M1 1L6.5 6L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Atur fee Steam (default 15%)
       </div>
-    </div>
-
-    <div class="tear"></div>
-
-    <div class="result">
-      <div class="row">
-        <span class="rlabel" id="rowNetLabel">Saldo Bersih (setelah fee)</span>
-        <span class="rvalue" id="rowNetValue">Rp 0</span>
-      </div>
-      <div class="divider"></div>
-      <div class="row hero-row" style="flex-direction:column; align-items:flex-start;">
-        <span class="rlabel" id="rowHeroLabel">Harga Jual (setelah rate)</span>
-        <span class="hero-value" id="rowHeroValue">Rp 0</span>
-        <span class="hero-formula" id="rowHeroFormula">SALDO BERSIH × RATE</span>
+      <div class="adv-panel" id="advPanel">
+        <div class="field-box">
+          <span class="prefix">%</span>
+          <input type="text" inputmode="decimal" id="inputFee" placeholder="15">
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="footnote" id="footnote">
-    Fee Steam dihitung dengan membagi saldo dengan (1 + fee%). Ubah persen fee di atas kalau ketentuanmu berbeda.
+  <div class="footer-note" id="footnote">
+    Fee dihitung dengan membagi saldo dengan <b>(1 + fee%)</b>. Ubah persen fee di atas kalau ketentuanmu beda.
   </div>
 </div>
 
@@ -343,8 +307,9 @@
   const rowHeroFormula = document.getElementById('rowHeroFormula');
   const advToggle = document.getElementById('advToggle');
   const advPanel = document.getElementById('advPanel');
+  const footnote = document.getElementById('footnote');
 
-  let mode = 'sell'; // sell = Jual Wallet, buy = Beli Wallet
+  let mode = 'sell';
 
   advToggle.addEventListener('click', () => {
     advToggle.classList.toggle('open');
@@ -371,18 +336,18 @@
 
     if(mode === 'sell'){
       labelMain.textContent = 'Saldo Wallet Penjual';
-      hintMain.textContent = 'Nominal saldo Steam Wallet sebelum potongan fee.';
-      rowNetLabel.textContent = 'Saldo Bersih (setelah fee)';
+      hintMain.textContent = 'Sebelum potongan fee.';
+      rowNetLabel.textContent = 'Saldo Bersih';
       rowHeroLabel.textContent = 'Harga Jual (kamu terima)';
       rowHeroFormula.textContent = 'SALDO BERSIH × RATE';
-      footnote.textContent = 'Fee Steam dihitung dengan membagi saldo dengan (1 + fee%). Ubah persen fee di atas kalau ketentuanmu berbeda.';
+      footnote.innerHTML = 'Fee dihitung dengan membagi saldo dengan <b>(1 + fee%)</b>. Ubah persen fee di atas kalau ketentuanmu beda.';
     } else {
       labelMain.textContent = 'Harga yang Mau Dibayar';
-      hintMain.textContent = 'Nominal Rupiah yang ingin kamu bayarkan ke penjual.';
-      rowNetLabel.textContent = 'Saldo Bersih yang Didapat';
-      rowHeroLabel.textContent = 'Saldo Wallet yang Diminta Penjual';
+      hintMain.textContent = 'Nominal yang mau kamu bayar.';
+      rowNetLabel.textContent = 'Saldo Bersih Didapat';
+      rowHeroLabel.textContent = 'Saldo Diminta Penjual';
       rowHeroFormula.textContent = 'SALDO BERSIH × (1 + FEE%)';
-      footnote.textContent = 'Ini estimasi berapa saldo wallet kotor yang wajar diminta penjual, dihitung mundur dari harga dan rate.';
+      footnote.textContent = 'Estimasi saldo wallet kotor yang wajar diminta penjual, dihitung mundur dari harga & rate.';
     }
     calculate();
   }
@@ -412,7 +377,6 @@
   btnBuy.addEventListener('click', () => setMode('buy'));
   [inputMain, inputRate, inputFee].forEach(el => el.addEventListener('input', calculate));
 
-  // defaults to make first render meaningful
   inputMain.value = '97243';
   inputRate.value = '0.85';
   inputFee.value = '15';
